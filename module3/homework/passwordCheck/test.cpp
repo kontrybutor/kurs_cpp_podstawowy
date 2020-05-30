@@ -39,5 +39,9 @@ TEST(checkPasswordTests, returnsPasswordsDoesNotMatchForDifferentPasswords) {
 
 TEST(getErrorMessageTests, returnsErrorCodeAsString) {
     EXPECT_EQ(getErrorMessage(ErrorCode::Ok), "YourPasswordIsOK");
-    // Add other tests for getErrorMessage if you wish
+    EXPECT_EQ(getErrorMessage(ErrorCode::PasswordNeedsAtLeastNineCharacters), "NeedsAtLeastNineCharacters");
+    EXPECT_EQ(getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneNumber), "NeedsAtLeastOneNumber");
+    EXPECT_EQ(getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter), "NeedsOneSpecialCharacter");
+    EXPECT_EQ(getErrorMessage(ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter), "NeedsAtLeastOneUppercaseLetter");
+    EXPECT_EQ(getErrorMessage(ErrorCode::PasswordsDoesNotMatch), "PasswordsDoesNotMatch");
 }
