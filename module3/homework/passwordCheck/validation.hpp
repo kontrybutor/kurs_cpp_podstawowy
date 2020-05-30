@@ -2,7 +2,8 @@
 
 #include <string>
 
-enum class ErrorCode {
+enum class ErrorCode
+{
     Ok,
     PasswordNeedsAtLeastNineCharacters,
     PasswordNeedsAtLeastOneNumber,
@@ -11,11 +12,10 @@ enum class ErrorCode {
     PasswordsDoesNotMatch
 };
 
-
 std::string getErrorMessage(const ErrorCode &err);
 
-bool doesPasswordsMatch(const std::string & passwd1, const std::string & passwd2);
+bool doesPasswordsMatch(const std::string &passwd1, const std::string &passwd2);
 
-ErrorCode checkPasswordRules(const std::string & passwd);
+ErrorCode checkPasswordRules(const std::string &passwd);
 
-ErrorCode checkPassword(const std::string & passwd1, const std::string & passwd2);
+ErrorCode checkPassword(const std::string &passwd1, const std::string &passwd2);
