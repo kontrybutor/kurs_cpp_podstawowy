@@ -16,7 +16,7 @@ std::string getErrorMessage(const ErrorCode &err)
         {EC::PasswordNeedsAtLeastOneUppercaseLetter, "NeedsAtLeastOneUppercaseLetter"},
         {EC::PasswordsDoesNotMatch, "PasswordsDoesNotMatch"}};
 
-    if (errorMap.contains(err))
+    if (errorMap.find(err) != errorMap.end())
     {
         message = errorMap[err];
     }
