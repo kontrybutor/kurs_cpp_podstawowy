@@ -1,11 +1,13 @@
 #include "validation.hpp"
 
+#include <algorithm>
 #include <map>
+
 using EC = ErrorCode;
 
 std::string getErrorMessage(const ErrorCode &err)
 {
-    std::string result;
+    std::string message;
     std::map<ErrorCode, std::string> errorMap = {
         {EC::Ok, "YourPasswordIsOK"},
         {EC::PasswordNeedsAtLeastNineCharacters, "NeedsAtLeastNineCharacters"},
@@ -16,26 +18,37 @@ std::string getErrorMessage(const ErrorCode &err)
 
     if (errorMap.contains(err))
     {
-        result = errorMap[err];
+        message = errorMap[err];
     }
-    return result;
+    return message;
 }
 
 bool doesPasswordsMatch(const std::string &passwd1,
                         const std::string &passwd2)
 {
-    bool result = false;
-    if (passwd1 == passwd2)
-    {
-        result = true;
-    }
-    return result;
+    return (passwd1 == passwd2);
 }
 
 ErrorCode checkPasswordRules(const std::string &passwd)
 {
-    ErrorCode err;
+    EC err;
 
+    if (std::any_of(passwd.begin(), passwd.end(), ::isupper))
+    {
+        err = EC::PasswordNeedsAtLeastOneUppercaseLetter;
+    }
+    else if (std::any_of(passwd.begin(), passwd.end(), [](const auto c) { return !isalnum(c); }))
+    {
+        err = EC::PasswordNeedsAtLeastOneSpecialCharacter;
+    }
+    else if (std::any_of(passwd.begin(), passwd.end(), ::isdigit))
+    {
+        err = EC::PasswordNeedsAtLeastOneNumber;
+    }
+    else if (passwd.length() < 9)
+    {
+        err = EC::PasswordNeedsAtLeastNineCharacters;
+    }
     return err;
 }
 
@@ -45,7 +58,7 @@ ErrorCode checkPassword(const std::string &passwd1,
 
     if (doesPasswordsMatch(passwd1, passwd2))
     {
-        return ErrorCode::Ok;
+        return EC::Ok;
     }
-    return ErrorCode::PasswordsDoesNotMatch;
+    return EC::PasswordsDoesNotMatch;
 }

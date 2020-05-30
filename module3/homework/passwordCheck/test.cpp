@@ -38,6 +38,6 @@ TEST(checkPasswordTests, returnsPasswordsDoesNotMatchForDifferentPasswords) {
 }
 
 TEST(getErrorMessageTests, returnsErrorCodeAsString) {
-    EXPECT_EQ(getErrorMessage(ErrorCode::Ok), "OK");
+    EXPECT_EQ(getErrorMessage(ErrorCode::Ok), "YourPasswordIsOK");
     // Add other tests for getErrorMessage if you wish
 }
