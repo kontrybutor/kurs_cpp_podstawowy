@@ -13,8 +13,7 @@ std::string getErrorMessage(const ErrorCode &err)
         {EC::PasswordNeedsAtLeastNineCharacters, "NeedsAtLeastNineCharacters"},
         {EC::PasswordNeedsAtLeastOneNumber, "NeedsAtLeastOneNumber"},
         {EC::PasswordNeedsAtLeastOneSpecialCharacter, "NeedsOneSpecialCharacter"},
-        {EC::PasswordNeedsAtLeastOneUppercaseLetter,
-         "NeedsAtLeastOneUppercaseLetter"},
+        {EC::PasswordNeedsAtLeastOneUppercaseLetter, "NeedsAtLeastOneUppercaseLetter"},
         {EC::PasswordsDoesNotMatch, "PasswordsDoesNotMatch"}};
 
     if (errorMap.contains(err))
