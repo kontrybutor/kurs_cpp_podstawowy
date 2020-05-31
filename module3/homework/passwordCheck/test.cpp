@@ -26,6 +26,13 @@ TEST(checkPasswordRulesTests, returnsValuesBetweenOkAndPasswordNeedsAtLeastOneUp
     EXPECT_LE(checkPasswordRules(TOO_SHORT_PASSWORD), MAX_ALLOWED_ERROR_CODE);
 }
 
+TEST(checkExtendedPasswordRulesTests, returnsValuesBetweenOkAndPasswordNeedsAtLeastOneUppercaseLetter) {
+    EXPECT_EQ(checkPasswordRules("Sh0r!"), ErrorCode::PasswordNeedsAtLeastNineCharacters);
+    EXPECT_EQ(checkPasswordRules("noupperca$3"), ErrorCode::PasswordNeedsAtLeastOneUppercaseLetter);
+    EXPECT_EQ(checkPasswordRules("Uppperca$e"), ErrorCode::PasswordNeedsAtLeastOneNumber);
+    EXPECT_EQ(checkPasswordRules("Upppercas3"), ErrorCode::PasswordNeedsAtLeastOneSpecialCharacter);
+}
+
 TEST(checkPasswordTests, returnsValuesBetweenOkAndPasswordNeedsAtLeastOneUppercaseLetter) {
     EXPECT_GE(checkPassword(PROPER_PASSWORD, PROPER_PASSWORD), MIN_ALLOWED_ERROR_CODE);
     EXPECT_LE(checkPassword(PROPER_PASSWORD, PROPER_PASSWORD), MAX_ALLOWED_ERROR_CODE);

@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include <map>
-
+#include <iostream>
 using EC = ErrorCode;
 
 std::string getErrorMessage(const ErrorCode &err)
@@ -31,26 +31,25 @@ bool doesPasswordsMatch(const std::string &passwd1,
 
 ErrorCode checkPasswordRules(const std::string &passwd)
 {
-    EC err = EC::Ok;
-
-    if (std::any_of(passwd.begin(), passwd.end(), ::isupper))
+    constexpr const auto minAllowedLength = 9;
+    if (passwd.length() < minAllowedLength)
     {
-        err = EC::PasswordNeedsAtLeastOneUppercaseLetter;
+        return EC::PasswordNeedsAtLeastNineCharacters;
     }
-    if (std::any_of(passwd.begin(), passwd.end(),
-                    [](const auto c) { return !isalnum(c); }))
+    if (!std::any_of(passwd.begin(), passwd.end(), ::isupper))
     {
-        err = EC::PasswordNeedsAtLeastOneSpecialCharacter;
+        return EC::PasswordNeedsAtLeastOneUppercaseLetter;
     }
-    if (std::any_of(passwd.begin(), passwd.end(), ::isdigit))
+    if (!std::any_of(passwd.begin(), passwd.end(), ::isdigit))
     {
-        err = EC::PasswordNeedsAtLeastOneNumber;
+        return EC::PasswordNeedsAtLeastOneNumber;
     }
-    if (passwd.length() < 9)
+    if (!std::any_of(passwd.begin(), passwd.end(),
+                     [](const auto c) { return !isalnum(c); }))
     {
-        err = EC::PasswordNeedsAtLeastNineCharacters;
+        return EC::PasswordNeedsAtLeastOneSpecialCharacter;
     }
-    return err;
+    return EC::Ok;
 }
 
 ErrorCode checkPassword(const std::string &passwd1,
