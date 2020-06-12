@@ -23,8 +23,8 @@ std::string getErrorMessage(const ErrorCode &err)
     return message;
 }
 
-bool doesPasswordsMatch(const std::string &passwd1,
-                        const std::string &passwd2)
+bool doesPasswordsMatch(const std::string& passwd1,
+                        const std::string& passwd2)
 {
     return passwd1 == passwd2;
 }
