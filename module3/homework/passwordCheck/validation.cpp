@@ -52,8 +52,8 @@ ErrorCode checkPasswordRules(const std::string &passwd)
     return EC::Ok;
 }
 
-ErrorCode checkPassword(const std::string &passwd1,
-                        const std::string &passwd2)
+ErrorCode checkPassword(const std::string& passwd1,
+                        const std::string& passwd2)
 {
     if (doesPasswordsMatch(passwd1, passwd2))
     {
